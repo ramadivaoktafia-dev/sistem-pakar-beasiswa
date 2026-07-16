@@ -1,0 +1,252 @@
+/* =====================================
+   SMARTSCHOLAR GLOBAL STYLE
+===================================== */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+
+  font-family:"Poppins",sans-serif;
+
+  background:linear-gradient(135deg,#edf4ff,#dbeafe,#f8fbff);
+
+  color:#1f2937;
+
+  min-width:320px;
+
+  min-height:100vh;
+
+}
+
+/* ROOT */
+
+#root{
+
+  width:100%;
+
+  min-height:100vh;
+
+}
+
+/* TEXT */
+
+h1,h2,h3,h4,h5,h6{
+
+  font-weight:700;
+
+  color:#1e3a8a;
+
+}
+
+p{
+
+  line-height:1.7;
+
+  color:#4b5563;
+
+}
+
+a{
+
+  text-decoration:none;
+
+  color:#2563eb;
+
+  transition:.3s;
+
+}
+
+a:hover{
+
+  color:#7c3aed;
+
+}
+
+/* BUTTON */
+
+button{
+
+  border:none;
+
+  border-radius:12px;
+
+  padding:12px 24px;
+
+  font-size:15px;
+
+  font-weight:600;
+
+  font-family:inherit;
+
+  cursor:pointer;
+
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+  color:#fff;
+
+  transition:.3s;
+
+}
+
+button:hover{
+
+  transform:translateY(-3px);
+
+  box-shadow:0 12px 25px rgba(37,99,235,.35);
+
+}
+
+/* INPUT */
+
+input,
+select,
+textarea{
+
+  font-family:inherit;
+
+  font-size:15px;
+
+  border-radius:10px;
+
+  border:1px solid #d1d5db;
+
+  padding:12px;
+
+  transition:.3s;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+  outline:none;
+
+  border-color:#2563eb;
+
+  box-shadow:0 0 10px rgba(37,99,235,.2);
+
+}
+
+/* CARD */
+
+.card{
+
+  background:white;
+
+  border-radius:20px;
+
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar{
+
+  width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+  background:#edf2ff;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+  background:#3b82f6;
+
+  border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+  background:#1d4ed8;
+
+}
+
+/* ANIMATION */
+
+@keyframes fadeIn{
+
+  from{
+
+    opacity:0;
+
+    transform:translateY(20px);
+
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+  }
+
+}
+
+.fade-in{
+
+  animation:fadeIn .5s ease;
+
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+  body{
+
+    font-size:14px;
+
+  }
+
+  h1{
+
+    font-size:32px;
+
+  }
+
+  h2{
+
+    font-size:24px;
+
+  }
+
+}
+/* ===========================
+   CHART
+=========================== */
+
+.chart-card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    margin-bottom:35px;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+}
+
+.chart-card canvas{
+
+    max-height:350px;
+
+}
