@@ -2,22 +2,24 @@ import { backwardChaining } from "../utils/backwardChaining";
 
 function TabelKandidat({ kandidatData, hapusKandidat, bukaModal }) {
   const getStatusBadge = (status) => {
-    if (status === "layak") {
-      return <span className="status-layak">✅ Layak</span>;
-    }
+    switch (status) {
+      case "layak":
+        return <span className="status-layak">✅ Layak</span>;
 
-    if (status === "dipertimbangkan") {
-      return (
-        <span className="status-dipertimbangkan">
-          ⚠ Dipertimbangkan
-        </span>
-      );
-    }
+      case "dipertimbangkan":
+        return (
+          <span className="status-dipertimbangkan">
+            ⚠️ Dipertimbangkan
+          </span>
+        );
 
-    return <span className="status-tidak">❌ Tidak Layak</span>;
+      case "tidak_layak":
+      default:
+        return <span className="status-tidak">❌ Tidak Layak</span>;
+    }
   };
 
-  if (kandidatData.length === 0) {
+  if (!kandidatData || kandidatData.length === 0) {
     return (
       <div className="empty-data">
         <h3>📂 Belum Ada Data</h3>
@@ -28,58 +30,55 @@ function TabelKandidat({ kandidatData, hapusKandidat, bukaModal }) {
 
   return (
     <div>
-
       <h2 className="section-title">
         📊 Hasil Evaluasi Kandidat
       </h2>
 
       <div className="candidate-grid">
-
         {kandidatData.map((kandidat, index) => {
 
-          const { status, proses } =
-            backwardChaining(kandidat);
+          const hasil =
+            kandidat.status && kandidat.proses
+              ? kandidat
+              : {
+                  ...kandidat,
+                  ...backwardChaining(kandidat),
+                };
 
           return (
-
-            <div className="candidate-card" key={index}>
-
+            <div
+              className="candidate-card"
+              key={kandidat.id ?? index}
+            >
               <div className="candidate-header">
-
                 <div>
-
-                  <h3>👤 {kandidat.nama}</h3>
-
-                  <small>
-                    Kandidat #{index + 1}
-                  </small>
-
+                  <h3>👤 {hasil.nama}</h3>
+                  <small>Kandidat #{index + 1}</small>
                 </div>
 
-                {getStatusBadge(status)}
-
+                {getStatusBadge(hasil.status)}
               </div>
 
               <div className="candidate-body">
 
                 <p>
                   <strong>📚 IPK</strong>
-                  <span>{kandidat.ipk}</span>
+                  <span>{hasil.ipk}</span>
                 </p>
 
                 <p>
                   <strong>🏛 Organisasi</strong>
-                  <span>{kandidat.aktif_organisasi}</span>
+                  <span>{hasil.aktif_organisasi}</span>
                 </p>
 
                 <p>
                   <strong>🏆 Prestasi</strong>
-                  <span>{kandidat.prestasi}</span>
+                  <span>{hasil.prestasi}</span>
                 </p>
 
                 <p>
                   <strong>💰 Ekonomi</strong>
-                  <span>{kandidat.kondisi_ekonomi}</span>
+                  <span>{hasil.kondisi_ekonomi}</span>
                 </p>
 
               </div>
@@ -88,27 +87,27 @@ function TabelKandidat({ kandidatData, hapusKandidat, bukaModal }) {
 
                 <button
                   className="btn-detail"
-                  onClick={() => bukaModal(proses)}
+                  onClick={() => bukaModal(hasil.proses)}
                 >
                   🔍 Detail
                 </button>
 
                 <button
-                  className="btn-delete"
-                  onClick={() => hapusKandidat(index)}
-                >
-                  🗑 Hapus
-                </button>
+  className="btn-delete"
+  onClick={() => {
+    alert("Tombol Hapus diklik");
+    console.log(kandidat);
+    hapusKandidat(kandidat.id);
+  }}
+>
+  🗑 Hapus
+</button>
 
               </div>
-
             </div>
-
           );
         })}
-
       </div>
-
     </div>
   );
 }
